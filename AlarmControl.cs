@@ -18,7 +18,7 @@ namespace Prelim_Lab_Exam
         public AlarmControl()
         {
             InitializeComponent();
-             Offbtn.Enabled = false;
+            Offbtn.Enabled = false;
         }
 
         private void AlarmControl_Load(object sender, EventArgs e)
@@ -26,8 +26,6 @@ namespace Prelim_Lab_Exam
             timer1.Start();
             string currTime = DateTime.Now.ToLongTimeString();
             string selectedTime = dateTimePicker.Value.ToLongTimeString();
-            debug1.Text = currTime;
-            debug2.Text = selectedTime;
             if (status)
             {
                 if (currTime == selectedTime)
@@ -37,7 +35,22 @@ namespace Prelim_Lab_Exam
                     {
                         playSound.SoundLocation = newSound;
                         playSound.PlayLooping();
-
+                        // Show the message box to notify the user
+                        DialogResult result = MessageBox.Show("The alarm is ringing. Do you want to turn it off?", "Alarm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (result == DialogResult.Yes)
+                        {
+                            playSound.Stop();
+                            status = false;
+                            statuslbl.Text = "Status: Alarm is Inactive";
+                            Onbtn.Enabled = true;
+                            Offbtn.Enabled = false;
+                            dateTimePicker.Enabled = true;
+                        }
+                        else
+                        {
+                            timer1.Start();
+                            playSound.Stop();
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -46,9 +59,10 @@ namespace Prelim_Lab_Exam
                 }
             }
         }
-
         private void Onbtn_Click(object sender, EventArgs e)
         {
+            activepb.Visible = true;
+            waitingpb.Visible = false;
             status = true;
             statuslbl.Text = "Status: Alarm is On";
             timer1.Start();
@@ -59,6 +73,8 @@ namespace Prelim_Lab_Exam
 
         private void Offbtn_Click(object sender, EventArgs e)
         {
+            activepb.Visible = false;
+            waitingpb.Visible = true;
             status = false;
             statuslbl.Text = "Status: Alarm is Inactive";
             timer1.Stop();
@@ -66,5 +82,26 @@ namespace Prelim_Lab_Exam
             Offbtn.Enabled = false;
             dateTimePicker.Enabled = true;
         }
+
+        private void menubtn_Click(object sender, EventArgs e)
+        {
+            CMS.Show(alarm1pnl, alarm1pnl.Height, 0);
+        }
+
+        private void CMS_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "WAV files (*.wav)|*.wav|All files (*.*)|*.*";
+                openFileDialog.Title = "Select a Sound File";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    newSound = openFileDialog.FileName;
+                    playSound.SoundLocation = newSound;
+                }
+            }
+        }
+
     }
 }

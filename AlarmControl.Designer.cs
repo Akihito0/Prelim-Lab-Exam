@@ -37,11 +37,15 @@
             alarm1lbl = new Label();
             dateTimePicker = new DateTimePicker();
             menubtn = new Button();
-            contextMenuStrip1 = new ContextMenuStrip(components);
+            CMS = new ContextMenuStrip(components);
+            selectNewSoundToolStripMenuItem = new ToolStripMenuItem();
             timer1 = new System.Windows.Forms.Timer(components);
-            debug1 = new Label();
-            debug2 = new Label();
+            activepb = new PictureBox();
+            waitingpb = new PictureBox();
             alarm1pnl.SuspendLayout();
+            CMS.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)activepb).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)waitingpb).BeginInit();
             SuspendLayout();
             // 
             // alarm1pnl
@@ -114,12 +118,21 @@
             menubtn.Size = new Size(28, 39);
             menubtn.TabIndex = 0;
             menubtn.UseVisualStyleBackColor = true;
+            menubtn.Click += menubtn_Click;
             // 
-            // contextMenuStrip1
+            // CMS
             // 
-            contextMenuStrip1.ImageScalingSize = new Size(20, 20);
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(61, 4);
+            CMS.ImageScalingSize = new Size(20, 20);
+            CMS.Items.AddRange(new ToolStripItem[] { selectNewSoundToolStripMenuItem });
+            CMS.Name = "contextMenuStrip1";
+            CMS.Size = new Size(199, 28);
+            CMS.ItemClicked += CMS_ItemClicked;
+            // 
+            // selectNewSoundToolStripMenuItem
+            // 
+            selectNewSoundToolStripMenuItem.Name = "selectNewSoundToolStripMenuItem";
+            selectNewSoundToolStripMenuItem.Size = new Size(198, 24);
+            selectNewSoundToolStripMenuItem.Text = "Select New Sound";
             // 
             // timer1
             // 
@@ -127,40 +140,46 @@
             timer1.Interval = 1000;
             timer1.Tick += AlarmControl_Load;
             // 
-            // debug1
+            // activepb
             // 
-            debug1.Location = new Point(248, 29);
-            debug1.Name = "debug1";
-            debug1.Size = new Size(229, 25);
-            debug1.TabIndex = 4;
-            debug1.Text = "label1";
+            activepb.Image = (Image)resources.GetObject("activepb.Image");
+            activepb.Location = new Point(499, 83);
+            activepb.Name = "activepb";
+            activepb.Size = new Size(230, 215);
+            activepb.TabIndex = 4;
+            activepb.TabStop = false;
             // 
-            // debug2
+            // waitingpb
             // 
-            debug2.Location = new Point(248, 54);
-            debug2.Name = "debug2";
-            debug2.Size = new Size(229, 25);
-            debug2.TabIndex = 5;
-            debug2.Text = "label2";
+            waitingpb.Image = (Image)resources.GetObject("waitingpb.Image");
+            waitingpb.Location = new Point(62, 70);
+            waitingpb.Name = "waitingpb";
+            waitingpb.Size = new Size(218, 228);
+            waitingpb.TabIndex = 5;
+            waitingpb.TabStop = false;
             // 
             // AlarmControl
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(debug2);
-            Controls.Add(debug1);
+            BackColor = SystemColors.ControlLightLight;
             Controls.Add(alarm1pnl);
+            Controls.Add(activepb);
+            Controls.Add(waitingpb);
             Name = "AlarmControl";
             Size = new Size(835, 529);
             Load += AlarmControl_Load;
             alarm1pnl.ResumeLayout(false);
             alarm1pnl.PerformLayout();
+            CMS.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)activepb).EndInit();
+            ((System.ComponentModel.ISupportInitialize)waitingpb).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
         private Panel alarm1pnl;
-        private ContextMenuStrip contextMenuStrip1;
+        private ContextMenuStrip CMS;
         private Button menubtn;
         private Button Offbtn;
         private Button Onbtn;
@@ -168,7 +187,8 @@
         private DateTimePicker dateTimePicker;
         private System.Windows.Forms.Timer timer1;
         private Label statuslbl;
-        private Label debug1;
-        private Label debug2;
+        private ToolStripMenuItem selectNewSoundToolStripMenuItem;
+        private PictureBox activepb;
+        private PictureBox waitingpb;
     }
 }
