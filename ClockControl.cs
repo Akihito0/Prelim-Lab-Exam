@@ -22,11 +22,13 @@ namespace Prelim_Lab_Exam
         {
             Clocklbl.Text = DateTime.Now.ToLongTimeString();
             greetinglbl.Text = "Good Morning!";
+            greetinglbl.ForeColor = Color.Black;
             //Initially set the visibility of the sun is true while noon and moon is false
             Sunpb.Visible = true;
             Noonpb.Visible = false;
             Moonpb.Visible = false;
             this.BackColor = Color.White;
+            Clocklbl.ForeColor = Color.Black;
             //If the time surpasses 12 noon, the sun will be hidden and the noon will be visible
             if (DateTime.Now.Hour > 11 && DateTime.Now.Hour < 18)
             {
@@ -42,7 +44,9 @@ namespace Prelim_Lab_Exam
                 Sunpb.Visible = false;
                 Noonpb.Visible = false;
                 Moonpb.Visible = true;
-                this.BackColor = Color.Black;
+                this.BackColor = ColorTranslator.FromHtml("#1C1C1C"); 
+                Clocklbl.ForeColor = Color.White;
+                greetinglbl.ForeColor = Color.White;
             }
         }
 
