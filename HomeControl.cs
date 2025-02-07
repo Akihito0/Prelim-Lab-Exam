@@ -19,7 +19,7 @@ namespace Prelim_Lab_Exam
 
         private void HomeControl_Load(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

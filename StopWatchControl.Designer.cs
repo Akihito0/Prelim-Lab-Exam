@@ -28,15 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StopWatchControl));
             stopwatch = new Label();
-            label2 = new Label();
             label3 = new Label();
             label4 = new Label();
             label5 = new Label();
             label6 = new Label();
             Startbtn = new Button();
             Stopbtn = new Button();
-            Resetbtn = new Button();
+            resetbtn = new PictureBox();
+            timer1 = new System.Windows.Forms.Timer(components);
+            ((System.ComponentModel.ISupportInitialize)resetbtn).BeginInit();
             SuspendLayout();
             // 
             // stopwatch
@@ -49,17 +52,6 @@
             stopwatch.TabIndex = 3;
             stopwatch.Text = "00:00:00:00";
             stopwatch.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            label2.Font = new Font("Franklin Gothic Medium Cond", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.ForeColor = SystemColors.ActiveCaptionText;
-            label2.Location = new Point(0, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(835, 71);
-            label2.TabIndex = 4;
-            label2.Text = "StopWatch";
-            label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label3
             // 
@@ -105,9 +97,10 @@
             // 
             Startbtn.BackColor = Color.FromArgb(0, 205, 115);
             Startbtn.FlatStyle = FlatStyle.Popup;
-            Startbtn.Location = new Point(87, 272);
+            Startbtn.Font = new Font("Digital-7", 9F, FontStyle.Bold);
+            Startbtn.Location = new Point(127, 257);
             Startbtn.Name = "Startbtn";
-            Startbtn.Size = new Size(176, 49);
+            Startbtn.Size = new Size(176, 64);
             Startbtn.TabIndex = 9;
             Startbtn.Text = "Start";
             Startbtn.UseVisualStyleBackColor = false;
@@ -117,42 +110,48 @@
             // 
             Stopbtn.BackColor = Color.FromArgb(247, 86, 91);
             Stopbtn.FlatStyle = FlatStyle.Popup;
-            Stopbtn.Location = new Point(305, 272);
+            Stopbtn.Font = new Font("Digital-7", 9F, FontStyle.Bold);
+            Stopbtn.Location = new Point(358, 257);
             Stopbtn.Name = "Stopbtn";
-            Stopbtn.Size = new Size(176, 49);
+            Stopbtn.Size = new Size(176, 64);
             Stopbtn.TabIndex = 10;
             Stopbtn.Text = "Stop";
             Stopbtn.UseVisualStyleBackColor = false;
             Stopbtn.Click += Stopbtn_Click;
             // 
-            // Resetbtn
+            // resetbtn
             // 
-            Resetbtn.BackColor = Color.FromArgb(25, 130, 196);
-            Resetbtn.FlatStyle = FlatStyle.Popup;
-            Resetbtn.Location = new Point(536, 272);
-            Resetbtn.Name = "Resetbtn";
-            Resetbtn.Size = new Size(176, 49);
-            Resetbtn.TabIndex = 11;
-            Resetbtn.Text = "Reset";
-            Resetbtn.UseVisualStyleBackColor = false;
-            Resetbtn.Click += Resetbtn_Click;
+            resetbtn.ErrorImage = null;
+            resetbtn.Image = (Image)resources.GetObject("resetbtn.Image");
+            resetbtn.Location = new Point(589, 257);
+            resetbtn.Name = "resetbtn";
+            resetbtn.Size = new Size(70, 64);
+            resetbtn.SizeMode = PictureBoxSizeMode.StretchImage;
+            resetbtn.TabIndex = 11;
+            resetbtn.TabStop = false;
+            resetbtn.Click += resetbtn_Click;
+            // 
+            // timer1
+            // 
+            timer1.Enabled = true;
+            timer1.Tick += timer1_Tick;
             // 
             // StopWatchControl
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(Resetbtn);
+            Controls.Add(resetbtn);
             Controls.Add(Stopbtn);
             Controls.Add(Startbtn);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
-            Controls.Add(label2);
             Controls.Add(stopwatch);
             Name = "StopWatchControl";
             Size = new Size(835, 529);
             Load += StopWatchControl_Load;
+            ((System.ComponentModel.ISupportInitialize)resetbtn).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -160,13 +159,13 @@
         #endregion
 
         private Label stopwatch;
-        private Label label2;
         private Label label3;
         private Label label4;
         private Label label5;
         private Label label6;
         private Button Startbtn;
         private Button Stopbtn;
-        private Button Resetbtn;
+        private PictureBox resetbtn;
+        private System.Windows.Forms.Timer timer1;
     }
 }

@@ -10,21 +10,11 @@ using System.Windows.Forms;
 
 namespace Prelim_Lab_Exam
 {
-    public partial class TimerControl : UserControl
+    public partial class TimerCountDown : UserControl
     {
-        public TimerControl()
+        public TimerCountDown()
         {
             InitializeComponent();
-        }
-
-        private void TimerControl_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void timerCountDown1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
